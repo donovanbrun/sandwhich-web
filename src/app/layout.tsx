@@ -9,10 +9,10 @@ import { getAuthToken } from "@/services/Storage";
 import { useRouter } from "next/navigation";
 import User from "@/models/User";
 
-export const metadata = {
-    title: 'SandWhich',
-    description: "It's time to share your favorite sandwiches !",
-}
+// export const metadata = {
+//     title: 'SandWhich',
+//     description: "It's time to share your favorite sandwiches !",
+// }
 
 export default function RootLayout({
     children,
