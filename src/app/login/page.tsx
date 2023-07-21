@@ -46,7 +46,7 @@ export default function Login() {
             <button onClick={handler}>Login</button>
             <p className={styles.Error}>{error}</p>
             <br />
-            <p>Don't have an account ?</p>
+            <p>Don&apos;t have an account ?</p>
             <button onClick={goToRegister}>Register</button>
         </div>
     )
