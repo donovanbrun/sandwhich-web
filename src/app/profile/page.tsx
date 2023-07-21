@@ -41,7 +41,7 @@ export default function Profile() {
                 {
                     sandwiches?.map((sandwich: Sandwich) => {
                         return (
-                            <div className={Style.Sandwich}>
+                            <div className={Style.Sandwich} key={sandwich.id}>
                                 <h3>{sandwich.name}</h3>
                                 <img src={sandwich.imageUrl} alt={sandwich.name} width={100} height={100} />
                             </div>
