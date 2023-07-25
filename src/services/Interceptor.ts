@@ -5,7 +5,7 @@ const axiosInterceptorInstance = axios.create();
 
 axiosInterceptorInstance.interceptors.request.use(
   (config) => {
-    const accessToken = getAuthToken()
+    const accessToken = getAuthToken()?.token;
 
     if (accessToken) {
       if (config.headers) config.headers.Authorization = "Bearer " + accessToken;

@@ -20,7 +20,7 @@ export default function Login() {
 
     let handler = () => {
         login(cred.email, cred.password).then(res => {
-            setAuthToken(res.data.token);
+            setAuthToken(res.data.token, res.data.expiration);
             router.push('/');
             getUser().then(res => {
                 setUser(res.data);

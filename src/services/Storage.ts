@@ -1,11 +1,17 @@
-export function setAuthToken(token: string) {
+export function setAuthToken(token: string, expiration: number) {
+    console.log("setAuthToken", token, expiration);
     localStorage.setItem("token", token);
+    localStorage.setItem("expiration", expiration.toString());
 }
 
 export function getAuthToken() {
-    return localStorage.getItem("token");
+    return {
+        token: localStorage.getItem("token"),
+        expiration: localStorage.getItem("expiration") ? parseInt(localStorage.getItem("expiration")!) : 0
+    };
 }
 
 export function removeAuthToken() {
-    return localStorage.removeItem("token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiration");
 }

@@ -23,7 +23,7 @@ export default function RootLayout({
     const router = useRouter();
 
     useEffect(() => {
-        if (getAuthToken() === null) {
+        if (getAuthToken().token === null || getAuthToken()?.expiration < (Date.now() / 1000)) {
             router.push('/login');
         }
         else {
