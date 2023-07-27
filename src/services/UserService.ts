@@ -6,8 +6,8 @@ export function getUser() {
     return axiosInterceptorInstance.get(`${API_URL}/api/user`);
 }
 
-export function getCurrentUserId() {
-    return 1;
+export function findUser(id: string) {
+    return axiosInterceptorInstance.get(`${API_URL}/api/user/find/${id}`);
 }
 
 export function login(email: string, password: string) {

@@ -1,18 +1,18 @@
 'use client';
 
-import Nav from "@/components/Nav"
+import Nav from "@/components/nav/Nav"
 import './globals.css'
-import { UserContext } from "@/services/Context";
+import { LoadingContext, UserContext } from "@/services/Context";
 import { useEffect, useState } from "react";
 import { getUser } from "@/services/UserService";
 import { getAuthToken } from "@/services/Storage";
 import { useRouter } from "next/navigation";
 import User from "@/models/User";
 
-// export const metadata = {
-//     title: 'SandWhich',
-//     description: "It's time to share your favorite sandwiches !",
-// }
+const metadata = {
+    title: 'SandWhich',
+    description: "It's time to share your favorite sandwiches !",
+}
 
 export default function RootLayout({
     children,
@@ -20,6 +20,7 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     const [user, setUser] = useState({} as User);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -35,11 +36,26 @@ export default function RootLayout({
 
     return (
         <html lang="en">
+            <head>
+                <title>SandWhich</title>
+                <meta name="description" content={"It's time to share your favorite sandwiches !"} />
+                <link rel="icon" href={"/SandWhich-icon.png"} />
+            </head>
             <body>
-                <UserContext.Provider value={{ user, setUser }}>
-                    <Nav />
-                    {children}
-                </UserContext.Provider>
+                <LoadingContext.Provider value={{ loading, setLoading }}>
+                    {
+                        loading ?
+                            <div className="Loader">
+                                <div className="Spinner">
+                                </div>
+                            </div>
+                            : null
+                    }
+                    <UserContext.Provider value={{ user, setUser }}>
+                        <Nav />
+                        {children}
+                    </UserContext.Provider>
+                </LoadingContext.Provider>
             </body>
         </html>
     )

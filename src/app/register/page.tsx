@@ -1,9 +1,10 @@
 'use client';
 
+import { LoadingContext } from '@/services/Context';
 import styles from './page.module.css'
 import { register } from "@/services/UserService";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 export default function Register() {
     const [name, setName] = useState('');
@@ -12,9 +13,12 @@ export default function Register() {
     const [error, setError] = useState('');
 
     const router = useRouter();
+    const { setLoading } = useContext(LoadingContext);
 
     let handleRegister = () => {
+        setLoading(true);
         register(name, email, password).then(res => {
+            setLoading(false);
             router.push('/login');
         }).catch(err => {
             console.log(err);

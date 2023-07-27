@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import './Nav.css'
 import Link from 'next/link'
 import { UserContext } from '@/services/Context';
@@ -11,8 +11,11 @@ export default function Nav() {
 
     return (
         <nav>
-            <Link href="/" className='NavItem'>Explore</Link>
-            <Link href="/create" className='NavItem'>Create</Link>
+            <img src="/SandWhich-icon.png" alt="SandWhich" width={50} height={50} />
+            <div className='NavItems'>
+                <Link href="/" className='NavItem'>Explore</Link>
+                <Link href="/create" className='NavItem'>Create</Link>
+            </div>
 
             {
                 user ? (

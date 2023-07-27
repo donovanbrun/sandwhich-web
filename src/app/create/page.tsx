@@ -2,7 +2,7 @@
 
 import Style from './page.module.css'
 import Sandwich from "@/models/Sandwich";
-import { UserContext } from "@/services/Context";
+import { LoadingContext, UserContext } from "@/services/Context";
 import { createSandwich } from "@/services/SandwichService";
 import { useRouter } from "next/navigation";
 import { use, useContext, useEffect, useState } from "react";
@@ -11,6 +11,7 @@ export default function Create() {
 
     const [sandwich, setSandwich] = useState({} as Sandwich);
     const { user, setUser } = useContext(UserContext);
+    const { setLoading } = useContext(LoadingContext);
     const router = useRouter();
 
     useEffect(() => {
@@ -28,7 +29,9 @@ export default function Create() {
     }
 
     let handleSubmit = (e: any) => {
+        setLoading(true);
         createSandwich(sandwich).then(res => {
+            setLoading(false);
             router.push('/');
         });
     }

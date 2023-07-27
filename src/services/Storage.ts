@@ -1,5 +1,4 @@
 export function setAuthToken(token: string, expiration: number) {
-    console.log("setAuthToken", token, expiration);
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expiration.toString());
 }

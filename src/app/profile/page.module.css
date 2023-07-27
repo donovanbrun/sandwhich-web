@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    width: 900px;
     gap: 5px;
 }
 
@@ -24,8 +25,9 @@
     width: 150px;
     height: 150px;
     gap: 5px;
-    background-color: black;
-    color: white;
+    background-color: lightgray;
+    color: black;
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
 }
