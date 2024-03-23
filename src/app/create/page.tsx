@@ -42,7 +42,7 @@ export default function Create() {
             {
                 step === 0 ?
                     <div className={Style.CreateSection}>
-                        <h1 className={Style.CreateTitle}>What's the name of your sandwich ?</h1>
+                        <h1 className={Style.CreateTitle}>What is the name of your sandwich ?</h1>
                         <input type="text" name="name" id="name" onChange={handleChange} placeholder='My Favorite Sandwich' />
                         <button onClick={() => setStep(1)}>Next</button>
                     </div>
@@ -54,7 +54,7 @@ export default function Create() {
                         </div>
                         : step === 2 ?
                             <div className={Style.CreateSection}>
-                                <h1 className={Style.CreateTitle}>What's in it ?</h1>
+                                <h1 className={Style.CreateTitle}>What is in it ?</h1>
                                 <textarea name="description" id="description" onChange={handleChange} />
                                 <button onClick={handleSubmit}>Create</button>
                             </div>
