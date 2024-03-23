@@ -13,6 +13,7 @@ export default function Create() {
     const { user, setUser } = useContext(UserContext);
     const { setLoading } = useContext(LoadingContext);
     const router = useRouter();
+    const [step, setStep] = useState(0);
 
     useEffect(() => {
         setSandwich({
@@ -38,14 +39,28 @@ export default function Create() {
 
     return (
         <div className={Style.Create}>
-            <h1>Create a sandwich</h1>
-            <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" onChange={handleChange} />
-            <label htmlFor="imageUrl">Image URL</label>
-            <input type="text" name="imageUrl" id="imageUrl" onChange={handleChange} />
-            <label htmlFor="description">Description</label>
-            <input type="text" name="description" id="description" onChange={handleChange} />
-            <button onClick={handleSubmit}>Create</button>
+            {
+                step === 0 ?
+                    <div className={Style.CreateSection}>
+                        <h1 className={Style.CreateTitle}>What's the name of your sandwich ?</h1>
+                        <input type="text" name="name" id="name" onChange={handleChange} placeholder='My Favorite Sandwich' />
+                        <button onClick={() => setStep(1)}>Next</button>
+                    </div>
+                    : step === 1 ?
+                        <div className={Style.CreateSection}>
+                            <h1 className={Style.CreateTitle}>Show us what it looks like !</h1>
+                            <input type="text" name="imageUrl" id="imageUrl" onChange={handleChange} placeholder='https://www...' />
+                            <button onClick={() => setStep(2)}>Next</button>
+                        </div>
+                        : step === 2 ?
+                            <div className={Style.CreateSection}>
+                                <h1 className={Style.CreateTitle}>What's in it ?</h1>
+                                <textarea name="description" id="description" onChange={handleChange} />
+                                <button onClick={handleSubmit}>Create</button>
+                            </div>
+                            : null
+            }
+
         </div>
     );
 }

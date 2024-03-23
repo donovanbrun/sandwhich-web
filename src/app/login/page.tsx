@@ -30,6 +30,7 @@ export default function Login() {
             router.push('/');
         }).catch(err => {
             console.log(err);
+            setLoading(false);
             setError("Error while logging in");
         });
     }

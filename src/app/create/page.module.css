@@ -1,7 +1,20 @@
 .Create {
     display: flex;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.CreateSection {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
+}
+
+.CreateTitle {
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(8, 63, 8);
 }

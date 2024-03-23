@@ -36,9 +36,11 @@ export default function Post({ sandwich }: PostProps) {
 
     return (
         <div className='Post' onClick={handler}>
-            <p className='PostTitle'> {sandwich.name} </p>
-            <img src={sandwich.imageUrl} width={300} alt={sandwich.name + " image"} />
-            <p className='PostUser'>By {user?.name} </p>
+            <img className="PostImg" src={sandwich.imageUrl} width={300} alt={sandwich.name + " image"} />
+            <div className='PostOverlay'>
+                <p className='PostTitle'> {sandwich.name} </p>
+                <p className='PostUser'>By {user?.name} </p>
+            </div>
         </div>
     );
 }

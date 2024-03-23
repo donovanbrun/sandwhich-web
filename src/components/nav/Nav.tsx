@@ -11,7 +11,9 @@ export default function Nav() {
 
     return (
         <nav>
-            <img src="/SandWhich-icon.png" alt="SandWhich" width={50} height={50} />
+            <Link href="/" className='NavItem'>
+                <img src="/SandWhich-icon.png" alt="SandWhich" width={60} height={60} />
+            </Link>
             <div className='NavItems'>
                 <Link href="/" className='NavItem'>Explore</Link>
                 <Link href="/create" className='NavItem'>Create</Link>

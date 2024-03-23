@@ -24,7 +24,11 @@ export default function Profile() {
                 setLoading(false);
             }).catch(err => {
                 console.log(err);
+                setLoading(false);
             })
+        }
+        else {
+            setLoading(false);
         }
     }, [user])
 
