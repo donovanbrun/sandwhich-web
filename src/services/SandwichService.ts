@@ -22,3 +22,7 @@ export function getSandwichesByUserID(id: string) {
 export function createSandwich(sandwich: Sandwich) {
     return axiosInterceptorInstance.post(`${API_URL}/api/sandwich/create`, sandwich);
 }
+
+export function updateSandwich(sandwich: Sandwich) {
+    return axiosInterceptorInstance.put(`${API_URL}/api/sandwich/update`, sandwich);
+}

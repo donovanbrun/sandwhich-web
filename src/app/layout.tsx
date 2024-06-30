@@ -6,13 +6,27 @@ import { LoadingContext, UserContext } from "@/services/Context";
 import { useEffect, useState } from "react";
 import { getUser } from "@/services/UserService";
 import { getAuthToken } from "@/services/Storage";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import User from "@/models/User";
 
 const metadata = {
     title: 'SandWhich',
     description: "It's time to share your favorite sandwiches !",
 }
+
+const unrestrictedRoutes = [
+    '/',
+    '/login',
+    '/register',
+    '/sandwich',
+    '/404',
+]
+
+const isAuthorized = (path: string, allowedPaths: string[]) => {
+    return allowedPaths.some(allowedPath => {
+        return path === allowedPath || path.startsWith(`${allowedPath}/`);
+    });
+};
 
 export default function RootLayout({
     children,
@@ -22,17 +36,22 @@ export default function RootLayout({
     const [user, setUser] = useState({} as User);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
+        getUser().then(res => {
+            setUser(res.data);
+        }).catch(err => {
+            console.log(err);
+        });
+
+        if (isAuthorized(pathname, unrestrictedRoutes)) {
+            return;
+        }
         if (getAuthToken().token === null || getAuthToken()?.expiration < (Date.now() / 1000)) {
             router.push('/login');
         }
-        else {
-            getUser().then(res => {
-                setUser(res.data);
-            })
-        }
-    }, [router])
+    }, [router, pathname])
 
     return (
         <html lang="en">

@@ -5,7 +5,6 @@ import './Post.css';
 import { useRouter } from 'next/navigation';
 import User from '@/models/User';
 import { useContext, useEffect, useState } from 'react';
-import { get } from 'http';
 import { findUser } from '@/services/UserService';
 import { LoadingContext } from '@/services/Context';
 
@@ -20,7 +19,7 @@ export default function Post({ sandwich }: PostProps) {
     const [user, setUser] = useState({} as User);
 
     useEffect(() => {
-        if (sandwich.userId === undefined) return;
+        if (!sandwich.userId) return;
         findUser(sandwich.userId).then(res => {
             setUser(res.data);
         }
@@ -36,7 +35,7 @@ export default function Post({ sandwich }: PostProps) {
 
     return (
         <div className='Post' onClick={handler}>
-            <img className="PostImg" src={sandwich.imageUrl} width={300} alt={sandwich.name + " image"} />
+            <img className="PostImg" src={sandwich.imageUrl} alt={sandwich.name + " image"} />
             <div className='PostOverlay'>
                 <p className='PostTitle'> {sandwich.name} </p>
                 <p className='PostUser'>By {user?.name} </p>

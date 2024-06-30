@@ -7,7 +7,7 @@ import { UserContext } from '@/services/Context';
 
 export default function Nav() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return (
         <nav>
@@ -20,8 +20,8 @@ export default function Nav() {
             </div>
 
             {
-                user ? (
-                    <Link href="/profile" className='NavItem'>{user.name}</Link>
+                user?.id ? (
+                    <Link href={`/profile/${user.id}`} className='NavItem'>{user.name}</Link>
                 ) : (
                     <Link href="/login" className='NavItem'>Login</Link>
                 )

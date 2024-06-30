@@ -8,10 +8,12 @@ body {
     min-height: 100vh;
 }
 
-input {
-    border-radius: 5px;
-    border: 1px solid grey;
-    padding: 5px;
+input,
+textarea {
+    border-radius: 10px;
+    border: 1px solid green;
+    padding: 10px;
+    font-size: medium;
 }
 
 button {
