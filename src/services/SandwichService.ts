@@ -3,8 +3,8 @@ import axiosInterceptorInstance from './Interceptor';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export function getSandwiches() {
-    return axiosInterceptorInstance.get(`${API_URL}/api/sandwich`);
+export function getSandwiches(page: number = 1) {
+    return axiosInterceptorInstance.get(`${API_URL}/api/sandwich?page=${page}`);
 }
 
 export function getSandwich(id: number) {

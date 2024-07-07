@@ -2,7 +2,7 @@
 
 import Nav from "@/components/nav/Nav"
 import './globals.css'
-import { LoadingContext, UserContext } from "@/services/Context";
+import { UserContext } from "@/services/Context";
 import { useEffect, useState } from "react";
 import { getUser } from "@/services/UserService";
 import { getAuthToken } from "@/services/Storage";
@@ -34,7 +34,6 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     const [user, setUser] = useState({} as User);
-    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
 
@@ -61,20 +60,10 @@ export default function RootLayout({
                 <link rel="icon" href={"/SandWhich-icon.png"} />
             </head>
             <body>
-                <LoadingContext.Provider value={{ loading, setLoading }}>
-                    {
-                        loading ?
-                            <div className="Loader">
-                                <div className="Spinner">
-                                </div>
-                            </div>
-                            : null
-                    }
-                    <UserContext.Provider value={{ user, setUser }}>
-                        <Nav />
-                        {children}
-                    </UserContext.Provider>
-                </LoadingContext.Provider>
+                <UserContext.Provider value={{ user, setUser }}>
+                    <Nav />
+                    {children}
+                </UserContext.Provider>
             </body>
         </html>
     )

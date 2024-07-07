@@ -6,19 +6,21 @@ import Sandwich from "@/models/Sandwich";
 import { getSandwich, updateSandwich } from "@/services/SandwichService";
 import { findUser } from '@/services/UserService';
 import { useContext, useEffect, useState } from "react";
-import { LoadingContext, UserContext } from '@/services/Context';
+import { UserContext } from '@/services/Context';
 import Link from 'next/link';
+import Loader from '@/components/loader/Loader';
 
 export default function SandwichPage({ params }: { params: { id: number } }) {
 
     const [sandwich, setSandwich] = useState({} as Sandwich);
     const [updatedSandwich, setUpdatedSandwich] = useState({} as Sandwich);
     const [user, setUser] = useState({} as User);
-    const { setLoading } = useContext(LoadingContext);
+    const [loading, setLoading] = useState(false);
     const { user: connectedUser } = useContext(UserContext);
     const [edit, setEdit] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         getSandwich(params?.id)
             .then(res => {
                 const s = res.data;
@@ -55,27 +57,28 @@ export default function SandwichPage({ params }: { params: { id: number } }) {
     };
 
     return (
-        <div className={styles.SandwichPage}>
-            {
-                edit ?
-                    <input type="text" name="name" id="name" value={updatedSandwich.name} onChange={(e) => handleChange(e, "name")} />
-                    : <h2>{sandwich.name}</h2>
-            }
-            <img src={sandwich.imageUrl} alt={sandwich.name + " image"} width={500} />
-            <Link href={`/profile/${user.id}`}>By {user.name}</Link>
-            {
-                edit ?
-                    <textarea name="description" id="description" value={updatedSandwich.description} onChange={(e) => handleChange(e, "description")} />
-                    : <p>{sandwich.description}</p>
-            }
-            {
-                (connectedUser.id !== undefined && connectedUser.id === user.id) &&
-                (
+        loading ? <Loader /> :
+            <div className={styles.SandwichPage}>
+                {
                     edit ?
-                        <button onClick={save}>Save</button>
-                        : <button onClick={() => setEdit(!edit)}>Edit</button>
-                )
-            }
-        </div >
+                        <input type="text" name="name" id="name" value={updatedSandwich.name} onChange={(e) => handleChange(e, "name")} />
+                        : <h2>{sandwich.name}</h2>
+                }
+                <img src={sandwich.imageUrl} alt={sandwich.name + " image"} width={500} />
+                <Link href={`/profile/${user.id}`}>By {user.name}</Link>
+                {
+                    edit ?
+                        <textarea name="description" id="description" value={updatedSandwich.description} onChange={(e) => handleChange(e, "description")} />
+                        : <p>{sandwich.description}</p>
+                }
+                {
+                    (connectedUser.id !== undefined && connectedUser.id === user.id) &&
+                    (
+                        edit ?
+                            <button onClick={save}>Save</button>
+                            : <button onClick={() => setEdit(!edit)}>Edit</button>
+                    )
+                }
+            </div >
     )
 }

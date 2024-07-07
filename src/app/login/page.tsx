@@ -1,6 +1,6 @@
 'use client';
 
-import { UserContext, LoadingContext } from '@/services/Context';
+import { UserContext } from '@/services/Context';
 import styles from './page.module.css'
 import { setAuthToken } from "@/services/Storage";
 import { getUser, login } from "@/services/UserService";
@@ -17,20 +17,19 @@ export default function Login() {
     const router = useRouter();
 
     const { setUser } = useContext(UserContext);
-    const { setLoading } = useContext(LoadingContext);
 
     let handler = () => {
-        setLoading(true);
+        // setLoading(true);
         login(cred.email, cred.password).then(res => {
             setAuthToken(res.data.token, res.data.expiration);
             getUser().then(res => {
                 setUser(res.data);
-                setLoading(false);
+                // setLoading(false);
             })
             router.push('/');
         }).catch(err => {
             console.log(err);
-            setLoading(false);
+            // setLoading(false);
             setError("Error while logging in");
         });
     }
